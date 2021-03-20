@@ -1,0 +1,32 @@
+-- Table: parcel.pracels
+
+-- DROP TABLE parcel.pracels;
+
+CREATE TABLE parcel.pracels
+(
+    pracels_id integer NOT NULL DEFAULT nextval('parcel.pracels_pracels_id_seq'::regclass),
+    current_state character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    current_location character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    current_transporter character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    customer_id integer,
+    order_id integer NOT NULL,
+    transporter_id integer NOT NULL,
+    CONSTRAINT pracels_pkey PRIMARY KEY (pracels_id),
+    CONSTRAINT fk_customer FOREIGN KEY (customer_id)
+        REFERENCES parcel.customer (customer_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT pracels_order_id_fkey FOREIGN KEY (order_id)
+        REFERENCES parcel.orders (order_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT pracels_transporter_id_fkey FOREIGN KEY (transporter_id)
+        REFERENCES parcel.transporter (transporter_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE parcel.pracels
+    OWNER to postgres;

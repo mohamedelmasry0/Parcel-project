@@ -1,0 +1,18 @@
+-- Table: parcel.customer
+
+-- DROP TABLE parcel.customer;
+
+CREATE TABLE parcel.customer
+(
+    customer_id integer NOT NULL DEFAULT nextval('parcel.customer_customer_id_seq'::regclass),
+    username character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    address character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    phone_number numeric(12,0) NOT NULL,
+    CONSTRAINT customer_pkey PRIMARY KEY (customer_id),
+    CONSTRAINT customer_username_key UNIQUE (username)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE parcel.customer
+    OWNER to postgres;

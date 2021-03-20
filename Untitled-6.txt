@@ -1,0 +1,16 @@
+-- Table: parcel.transporter
+
+-- DROP TABLE parcel.transporter;
+
+CREATE TABLE parcel.transporter
+(
+    transporter_id integer NOT NULL DEFAULT nextval('parcel.transporter_transporter_id_seq'::regclass),
+    warehouse character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    store character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT transporter_pkey PRIMARY KEY (transporter_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE parcel.transporter
+    OWNER to postgres;

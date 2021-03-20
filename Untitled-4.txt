@@ -1,0 +1,32 @@
+-- Table: parcel.orders
+
+-- DROP TABLE parcel.orders;
+
+CREATE TABLE parcel.orders
+(
+    order_id integer NOT NULL DEFAULT nextval('parcel.orders_order_id_seq'::regclass),
+    article character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    reference character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    quantity character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    unit_price character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    creation_date date NOT NULL,
+    the_state character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    completion_date date NOT NULL,
+    customer_id integer NOT NULL,
+    categories_id integer NOT NULL,
+    provider character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT orders_pkey PRIMARY KEY (order_id),
+    CONSTRAINT orders_categories_id_fkey FOREIGN KEY (categories_id)
+        REFERENCES parcel.categories (categories_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT orders_customer_id_fkey FOREIGN KEY (customer_id)
+        REFERENCES parcel.customer (customer_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE parcel.orders
+    OWNER to postgres;

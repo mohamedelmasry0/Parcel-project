@@ -1,0 +1,18 @@
+-- Table: parcel.store
+
+-- DROP TABLE parcel.store;
+
+CREATE TABLE parcel.store
+(
+    order_id integer NOT NULL,
+    store character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT store_order_id_fkey FOREIGN KEY (order_id)
+        REFERENCES parcel.orders (order_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE parcel.store
+    OWNER to postgres;
